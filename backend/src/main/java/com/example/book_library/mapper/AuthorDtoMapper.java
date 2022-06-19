@@ -2,10 +2,12 @@ package com.example.book_library.mapper;
 
 import com.example.book_library.dto.AuthorDto;
 import com.example.book_library.model.Author;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class AuthorDtoMapper {
     public Author convertToEntity(AuthorDto authorDto) {
         return new Author(authorDto.getId(), authorDto.getFirstname(), authorDto.getLastname());

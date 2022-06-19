@@ -16,9 +16,9 @@ import java.util.List;
 @RequestMapping("/books")
 public class BookController {
 
-    private BookDtoMapper mapper;
+    private final BookDtoMapper mapper;
 
-    private BookService bookService;
+    private final BookService bookService;
 
     @Autowired
     public BookController(BookDtoMapper mapper, BookService bookService) {
@@ -40,8 +40,8 @@ public class BookController {
 
     @GetMapping
     @RequestMapping("/author/{id}")
-    public List<BookDto> findByAuthor(@PathVariable Long authorId) {
-        List<Book> booksByAuthor = this.bookService.findAllByAuthor(authorId);
+    public List<BookDto> findByAuthor(@PathVariable Long id) {
+        List<Book> booksByAuthor = this.bookService.findAllByAuthor(id);
         return this.mapper.convertListToDtos(booksByAuthor);
     }
 

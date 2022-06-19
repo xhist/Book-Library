@@ -5,9 +5,11 @@ import com.example.book_library.model.Book;
 import com.example.book_library.model.Genre;
 import com.example.book_library.repository.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class BookService {
 
     @Autowired
@@ -47,7 +49,7 @@ public class BookService {
     public void add(Book book) {
         if(bookRepository.existsById(book.getIsbn())) {
             throw new IllegalArgumentException(
-                    String.format("Book already exists.", book.getTitle())
+                    String.format("Book %s already exists.", book.getTitle())
             );
         }
 

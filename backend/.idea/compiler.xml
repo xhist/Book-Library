@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="book_library" />
         <module name="Book-Library" />
+        <module name="backend" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Book-Library" options="-parameters" />
+      <module name="backend" options="-parameters" />
       <module name="book_library" options="-parameters" />
     </option>
   </component>
