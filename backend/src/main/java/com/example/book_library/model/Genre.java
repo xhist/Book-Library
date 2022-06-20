@@ -1,6 +1,7 @@
 package com.example.book_library.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "genres")

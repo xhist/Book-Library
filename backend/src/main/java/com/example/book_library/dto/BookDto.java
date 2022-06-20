@@ -10,8 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class BookDto {
-    private Long id;
-
     @Size(min = 2, message = "The title must consist of at least 2 characters")
     private String title;
 
@@ -28,19 +26,10 @@ public class BookDto {
     }
 
     public BookDto(Book book) {
-        this.id = book.getId();
         this.title = book.getTitle();
         this.genres = book.getGenres();
         this.isbn = book.getIsbn();
         this.author = book.getAuthor();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {

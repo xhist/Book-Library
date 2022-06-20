@@ -28,12 +28,6 @@ public class AuthorService {
     }
 
     public void add(Author author) {
-        if(authorRepository.existsById(author.getId())) {
-            throw new IllegalArgumentException(
-                    String.format("Author %s %s already exists.", author.getFirstName(), author.getLastName())
-            );
-        }
-
         authorRepository.save(author);
     }
 

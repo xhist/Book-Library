@@ -12,6 +12,8 @@ public class GenreDto {
     @Size(min = 2, message = "Genre name must be at least 2 chars long!")
     private String name;
 
+    public GenreDto() {}
+
     public GenreDto(String name) {
         setName(name);
     }

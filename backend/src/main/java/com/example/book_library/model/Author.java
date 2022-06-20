@@ -1,7 +1,8 @@
 package com.example.book_library.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "authors")
@@ -11,15 +12,13 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
+    @Size(min = 2, message = "First name must be at least 2 chars long.")
     private String firstName;
 
-    @Column
+    @Column(nullable = false)
+    @Size(min = 2, message = "Last name must be at least 2 chars long.")
     private String lastName;
-
-    @OneToMany
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
-    private HashSet<Book> books;
 
     public Author() {
     }
@@ -38,14 +37,6 @@ public class Author {
         this.id = id;
     }
 
-    public HashSet<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(HashSet<Book> books) {
-        this.books = books;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -60,9 +51,5 @@ public class Author {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Book getBook(String isbn) {
-        return books.stream().filter(b -> b.getIsbn().equals(isbn)).findFirst().orElseGet(() -> null);
     }
 }

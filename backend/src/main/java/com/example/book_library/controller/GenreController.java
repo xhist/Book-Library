@@ -38,12 +38,6 @@ public class GenreController {
         genreService.add(genre);
     }
 
-    @PutMapping
-    public void update(@Valid @RequestBody GenreDto genreDto) {
-        Genre genre = this.mapper.convertToEntity(genreDto);
-        genreService.update(genre);
-    }
-
     @DeleteMapping("/{name}")
     public void delete(@PathVariable String name) {
         genreService.delete(name);

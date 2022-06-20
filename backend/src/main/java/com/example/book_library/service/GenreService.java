@@ -5,6 +5,7 @@ import com.example.book_library.repository.IGenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -46,6 +47,7 @@ public class GenreService {
         genreRepository.save(genre);
     }
 
+    @Transactional
     public void delete(String name) {
         if(!genreRepository.existsById(name))
         {

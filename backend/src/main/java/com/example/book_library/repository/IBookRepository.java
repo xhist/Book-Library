@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface IBookRepository extends CrudRepository<Book, String> {
     public List<Book> findAllByAuthor(Author author);
-    public List<Book> findAllByGenre(Genre genre);
+    public List<Book> findAllByGenresContains(Genre genre);
+    public boolean existsByIsbn(String isbn);
 }

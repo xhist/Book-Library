@@ -39,7 +39,7 @@ public class BookService {
     public List<Book> findAllByGenre(String name) {
         LinkedList<Book> allBooks = new LinkedList<>();
         Genre genre = genreService.findById(name);
-        return bookRepository.findAllByGenre(genre);
+        return bookRepository.findAllByGenresContains(genre);
     }
 
     public Book findById(String isbn) {
@@ -47,7 +47,7 @@ public class BookService {
     }
 
     public void add(Book book) {
-        if(bookRepository.existsById(book.getIsbn())) {
+        if(bookRepository.existsByIsbn(book.getIsbn())) {
             throw new IllegalArgumentException(
                     String.format("Book %s already exists.", book.getTitle())
             );

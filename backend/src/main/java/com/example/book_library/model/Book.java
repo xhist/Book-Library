@@ -7,39 +7,33 @@ import java.util.Set;
 @Table(name = "books")
 public class Book {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {
+            CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST
+    })
     @JoinTable(name = "books_genres",
                 joinColumns = { @JoinColumn(name = "genres_name") },
-                inverseJoinColumns = { @JoinColumn(name = "books_id") })
+                inverseJoinColumns = { @JoinColumn(name = "books_isbn") })
     private Set<Genre> genres;
 
-    @Column(nullable = false)
+    @Id
     private String isbn;
 
     @Column(nullable = false)
     private String title;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id")
     private Author author;
 
     public Book() {
     }
 
-    public Book(Long id, String isbn, String title) {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public Book(String isbn, String title) {
+        this.isbn = isbn;
+        this.title = title;
     }
 
     public void setAuthor(Author author) {

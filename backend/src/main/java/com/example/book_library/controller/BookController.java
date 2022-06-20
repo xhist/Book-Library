@@ -31,8 +31,7 @@ public class BookController {
         return this.mapper.convertListToDtos(bookService.findAll());
     }
 
-    @GetMapping
-    @RequestMapping("/{isbn}")
+    @GetMapping(value = "/isbn/{isbn}")
     public BookDto findById(@PathVariable String isbn) {
         Book book = this.bookService.findById(isbn);
         return this.mapper.convertToDto(book);
@@ -52,8 +51,7 @@ public class BookController {
         return this.mapper.convertListToDtos(booksByGenre);
     }
 
-    @DeleteMapping
-    @RequestMapping("/{isbn}")
+    @DeleteMapping(value = "/isbn/{isbn}")
     public void delete(@PathVariable String isbn) {
         this.bookService.delete(isbn);
     }

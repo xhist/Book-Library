@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 @Component
 public class BookDtoMapper {
     public Book convertToEntity(BookDto bookDto) {
-        Book book = new Book(bookDto.getId(), bookDto.getIsbn(), bookDto.getTitle());
+        Book book = new Book();
+        book.setIsbn(bookDto.getIsbn());
+        book.setTitle(bookDto.getTitle());
         book.setAuthor(bookDto.getAuthor());
         book.setGenres(bookDto.getGenres());
 

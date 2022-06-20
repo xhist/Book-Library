@@ -1,18 +1,18 @@
 package com.example.book_library.dto;
 
 import com.example.book_library.model.Author;
-import com.example.book_library.model.Book;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 
 public class AuthorDto {
     private Long id;
 
+    @NotNull
     @Size(min = 2, message = "First name must be at least 2 characters long.")
     private String firstname;
 
+    @NotNull
     @Size(min = 2, message = "Last name must be at least 2 characters long.")
     private String lastname;
 
