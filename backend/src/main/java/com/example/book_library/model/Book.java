@@ -28,6 +28,10 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "notes_id")
+    private Set<Note> notes;
+
     public Book() {
     }
 
