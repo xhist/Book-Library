@@ -1,12 +1,9 @@
 package com.example.book_library.dto;
 
-import com.example.book_library.model.Book;
 import com.example.book_library.model.Note;
 
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 
 public class NoteDto {
     private Long id;
@@ -34,13 +31,12 @@ public class NoteDto {
 
     public NoteDto(Note note) {
         this.id = note.getId();
-        this.description = "";
+        this.description = note.getDescription();
         this.isbn = note.getBook().getIsbn();
         this.listName = note.getList().getName();
     }
 
-    public NoteDto(Long id, String description, String isbn, String listName) {
-        this.id = id;
+    public NoteDto(String description, String isbn, String listName) {
         this.description = description;
         this.isbn = isbn;
         this.listName = listName;

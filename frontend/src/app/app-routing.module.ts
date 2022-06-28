@@ -3,17 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import {BooksComponent} from "./books/books.component";
 import {ListComponent} from "./list/list.component";
 import {BookResolver} from "./books/book.resolver";
+import {ListResolver} from "./lists/list.resolver";
+import {NoteResolver} from "./lists/note.resolver";
 
 const routes: Routes = [
   {path: '', redirectTo: 'books', pathMatch: 'full'},
   {
     path: 'books', component: BooksComponent,
     resolve: {
-      booksSuccess: BookResolver
+      booksSuccess: BookResolver,
+      listsSuccess: ListResolver
     }
   },
   {
-    path: 'list', component: ListComponent
+    path: 'lists', component: ListComponent,
+    resolve: {
+      listsSuccess: ListResolver,
+      notesSuccess: NoteResolver
+    }
   }
 ];
 

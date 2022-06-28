@@ -7,6 +7,10 @@ export interface Genre {
   name: string;
 }
 
+export interface Isbn {
+  isbn: string;
+}
+
 export interface Book {
   isbn: string;
   title: string;

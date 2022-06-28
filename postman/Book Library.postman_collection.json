@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"isbn\": \"9786624909934\",\r\n    \"title\": \"Quantum physics\",\r\n    \"author\": {\r\n        \"id\" : 41,\r\n        \"firstName\" : \"Peter\",\r\n        \"lastName\" : \"Stoyanov\"\r\n    },\r\n    \"genres\" : [\"Science\", \"Fiction\", \"Comedy\"]\r\n}",
+							"raw": "{\r\n    \"isbn\": \"9786624909931\",\r\n    \"title\": \"Physics\",\r\n    \"author\": {\r\n        \"id\" : 41,\r\n        \"firstName\" : \"Peter\",\r\n        \"lastName\" : \"Stoyanov\"\r\n    },\r\n    \"genres\" : [\"Science\", \"Fiction\", \"Comedy\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,7 +381,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/notes/{{$randomUUID}}",
+							"raw": "http://localhost:8080/notes/id/47",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -389,7 +389,8 @@
 							"port": "8080",
 							"path": [
 								"notes",
-								"{{$randomUUID}}"
+								"id",
+								"47"
 							]
 						}
 					},
@@ -401,7 +402,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/notes/book/{{$guid}}",
+							"raw": "http://localhost:8080/notes/book/9786624909934",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -410,7 +411,7 @@
 							"path": [
 								"notes",
 								"book",
-								"{{$guid}}"
+								"9786624909934"
 							]
 						}
 					},
@@ -423,7 +424,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"description\": \"Normal desc\",\r\n    \"isbn\": \"9786624909934\",\r\n    \"listName\": \"example\"\r\n}",
+							"raw": "{\r\n    \"description\": \"dsafsadfa\",\r\n    \"isbn\": \"9786624909934\",\r\n    \"listName\": \"examples\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -451,7 +452,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"description\": \"Normal desc\",\r\n    \"isbn\": \"9786624909934\",\r\n    \"listName\": \"example\"\r\n}",
+							"raw": "{\r\n    \"id\": 47,\r\n    \"description\": \"Normal dsfsfa\",\r\n    \"isbn\": \"9786624909934\",\r\n    \"listName\": \"example\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -478,7 +479,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/notes/list/{{$randomWord}}",
+							"raw": "http://localhost:8080/notes/list/example",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -487,7 +488,7 @@
 							"path": [
 								"notes",
 								"list",
-								"{{$randomWord}}"
+								"example"
 							]
 						}
 					},
@@ -519,7 +520,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/notes/book/{{$randomWord}}/list/{{$randomWord}}",
+							"raw": "http://localhost:8080/notes/book/9786624909934/list/example",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -528,9 +529,38 @@
 							"path": [
 								"notes",
 								"book",
-								"{{$randomWord}}",
+								"9786624909934",
 								"list",
-								"{{$randomWord}}"
+								"example"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add notes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"noteDtos\": [\r\n        {\r\n            \"description\": \"dsafsdsafsa\",\r\n            \"isbn\": \"9786624909928\",\r\n            \"listName\": \"examples\"\r\n        },\r\n        {\r\n            \"description\": \"dsafsdasfsa\",\r\n            \"isbn\": \"9786624909928\",\r\n            \"listName\": \"example\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/notes/multiple",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"notes",
+								"multiple"
 							]
 						}
 					},
@@ -561,61 +591,13 @@
 					"response": []
 				},
 				{
-					"name": "Get list by name",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/lists/{{$randomWord}}",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"lists",
-								"{{$randomWord}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Add list",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"example list\",\r\n    \"notes\": [\r\n        {\r\n            \"description\": \"Example desc\",\r\n            \"isbn\": \"9786624909934\",\r\n            \"listName\": \"example list\"\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/lists",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"lists"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update list",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"example list\",\r\n    \"notes\": [\r\n        {\r\n            \"description\": \"changed description\",\r\n            \"isbn\": \"9786624909934\",\r\n            \"listName\": \"example list\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"name\": \"dummy\",\r\n    \"noteDtos\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

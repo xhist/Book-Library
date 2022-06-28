@@ -37,14 +37,6 @@ public class ListBooksService {
         listRepository.save(list);
     }
 
-    public void update(ListBooks list) {
-        if(!listRepository.existsById(list.getName()))
-        {
-            throw new NoSuchElementException(NOT_FOUND_LIST);
-        }
-        listRepository.save(list);
-    }
-
     public void delete(String name) {
         if(!listRepository.existsById(name)) {
             throw new NoSuchElementException(NOT_FOUND_LIST);

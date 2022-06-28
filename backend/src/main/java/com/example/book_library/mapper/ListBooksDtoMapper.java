@@ -15,21 +15,21 @@ import java.util.stream.Collectors;
 
 @Component
 public class ListBooksDtoMapper {
+    private NoteDtoMapper noteMapper;
 
     @Autowired
-    private NoteDtoMapper noteMapper;
+    public ListBooksDtoMapper(NoteDtoMapper noteMapper) {
+        this.noteMapper = noteMapper;
+    }
 
     public ListBooks convertToEntity(ListBooksDto listBooksDto) {
         ListBooks list = new ListBooks();
         list.setName(listBooksDto.getName());
-        List<NoteDto> noteDtos = new ArrayList<>(listBooksDto.getNoteDtos());
-        Set<Note> notes = new HashSet<>(noteMapper.convertListToEntities(noteDtos));
-        list.setNotes(notes);
         return list;
     }
 
     public ListBooksDto convertToDto(ListBooks list) {
-        return new ListBooksDto(list);
+        return new ListBooksDto(list.getName());
     }
 
     public List<ListBooksDto> convertListToDtos(List<ListBooks> lists) {

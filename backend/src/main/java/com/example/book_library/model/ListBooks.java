@@ -10,7 +10,7 @@ public class ListBooks {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "notes_id")
+    @JoinColumn(name = "notes_id")
     private Set<Note> notes;
 
     public ListBooks() {}

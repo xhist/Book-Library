@@ -4,21 +4,20 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import {BookService} from "../services/book.service";
 import {forkJoin, Observable} from "rxjs";
 import {ListService} from "../services/list.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class BookResolver implements Resolve<any> {
+export class ListResolver implements Resolve<any> {
 
-  constructor(private bookService: BookService) {}
+  constructor(private listService: ListService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return new Promise((resolve, reject) => {
       forkJoin([
-        this.bookService.getAllBooks()
+        this.listService.getAllLists()
       ])
         .subscribe((data: any) => {
           return resolve(true);

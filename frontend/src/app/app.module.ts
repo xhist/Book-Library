@@ -10,8 +10,9 @@ import { MaterialModule } from './material/material.module';
 import {HttpClientModule} from "@angular/common/http";
 import { PluckPipe } from './books/pluck.pipe';
 import { ListsComponent } from './lists/lists.component';
-import {ListdialogComponent, SelectMultipleExample} from './listdialog/listdialog.component';
+import {ListdialogComponent} from './listdialog/listdialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { SelectListComponent } from './listdialog/select-list/select-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     PluckPipe,
     ListsComponent,
     ListdialogComponent,
-    SelectMultipleExample
+    SelectListComponent
   ],
   imports: [
     BrowserModule,

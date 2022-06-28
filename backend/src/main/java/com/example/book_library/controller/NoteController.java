@@ -1,6 +1,7 @@
 package com.example.book_library.controller;
 
 import com.example.book_library.dto.NoteDto;
+import com.example.book_library.dto.NoteDtosWrapper;
 import com.example.book_library.mapper.NoteDtoMapper;
 import com.example.book_library.model.Note;
 import com.example.book_library.service.NoteService;
@@ -45,6 +46,13 @@ public class NoteController {
     @GetMapping(value = {"/book/{isbn}/list/{name}", "/list/{name}/book/{isbn}"})
     public NoteDto findByBookAndList(@PathVariable String isbn, @PathVariable String name) {
         return this.mapper.convertToDto(this.noteService.findByBookAndList(isbn, name));
+    }
+
+    @PostMapping("/multiple")
+    public void addAll(@Valid @RequestBody NoteDtosWrapper noteDtosWrapper) {
+        List<Note> notes = this.mapper.convertListToEntities(noteDtosWrapper.getNoteDtos());
+        for(Note note : notes)
+            this.noteService.add(note);
     }
 
     @PostMapping

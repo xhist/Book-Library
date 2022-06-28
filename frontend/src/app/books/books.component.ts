@@ -2,13 +2,16 @@ import {AfterViewInit, ViewChild, Component, OnInit, Output, EventEmitter, Input
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
-import {Book} from "../services/book";
+import {Book, Isbn} from "../services/book";
 import {BookService} from "../services/book.service";
 import {SelectionModel} from "@angular/cdk/collections";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {List} from "../list/list";
-import {Note} from "../list/list";
+import {List, Notes} from "../services/list";
+import {Note} from "../services/list";
+import {ListdialogComponent} from "../listdialog/listdialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-books',
@@ -27,12 +30,14 @@ export class BooksComponent implements AfterViewInit{
   @Input()
   //@ts-ignore
   books: Book[] = [];
+  //@ts-ignore
+  booksObservable$: Observable<Book[]>;
 
-  constructor(private bookService: BookService, private http : HttpClient) {}
+  constructor(private bookService: BookService, private http : HttpClient, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    const booksObservable = this.bookService.getAllBooksAsObservable();
-    booksObservable.subscribe((booksData: Book[]) => {
+    this.booksObservable$ = this.bookService.getAllBooksAsObservable();
+    this.booksObservable$.subscribe((booksData: Book[]) => {
       this.books = booksData;
     });
     this.dataSource$ = new MatTableDataSource<Book>(this.books);
@@ -71,16 +76,21 @@ export class BooksComponent implements AfterViewInit{
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'}`;
   }
 
-  addToList(list : string) {
-    if(this.selection.selected.length > 0)
-    {
-      var arrayNotes:Note[] = [];
+  extractSelectedBooks(): Isbn[] {
+    var arrayIsbn: Isbn[] = [];
+    if(this.selection.selected.length > 0) {
       this.selection.selected.forEach((current, index) => {
-        var note:Note = {description: "", isbn: current.isbn, listName: list.toString() };
-        arrayNotes.push(note);
+        var isbn: Isbn = {isbn: current.isbn};
+        arrayIsbn.push(isbn);
       });
-      var listrepr: List = {name: list?.toString(), notes: arrayNotes};
-      this.http.post<List>(environment.apiBackendEndpoint + 'lists', listrepr);
     }
+
+    return arrayIsbn;
+  }
+
+  openDialog(): void {
+    this.dialog.open(ListdialogComponent, {
+      data: this.extractSelectedBooks()
+    });
   }
 }

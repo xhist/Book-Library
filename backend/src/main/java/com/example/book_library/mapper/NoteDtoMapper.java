@@ -14,12 +14,14 @@ import java.util.stream.Collectors;
 
 @Component
 public class NoteDtoMapper {
-
-    @Autowired
     private BookService bookService;
+    private ListBooksService listService;
 
     @Autowired
-    private ListBooksService listService;
+    public NoteDtoMapper(BookService bookService, ListBooksService listService) {
+        this.bookService = bookService;
+        this.listService = listService;
+    }
 
     public Note convertToEntity(NoteDto noteDto) {
         Note note = new Note();
@@ -27,6 +29,7 @@ public class NoteDtoMapper {
         ListBooks list = listService.findByName(noteDto.getListName());
         if(noteDto.getId() != null)
             note.setId(noteDto.getId());
+        note.setDescription(noteDto.getDescription());
         note.setBook(book);
         note.setList(list);
         return note;
