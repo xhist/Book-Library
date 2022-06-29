@@ -13,6 +13,9 @@ import { ListsComponent } from './lists/lists.component';
 import {ListdialogComponent} from './listdialog/listdialog.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { SelectListComponent } from './listdialog/select-list/select-list.component';
+import { NotesCountPipe } from './lists/notes-count.pipe';
+import { EmptyComponent } from './lists/empty/empty.component';
+import { MyautofocusDirective } from './directives/myautofocus.directive';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { SelectListComponent } from './listdialog/select-list/select-list.compon
     PluckPipe,
     ListsComponent,
     ListdialogComponent,
-    SelectListComponent
+    SelectListComponent,
+    NotesCountPipe,
+    EmptyComponent,
+    MyautofocusDirective
   ],
   imports: [
     BrowserModule,

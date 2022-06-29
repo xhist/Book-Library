@@ -25,4 +25,8 @@ export class BookService {
   getAllBooksAsObservable() {
     return this.books$.asObservable();
   }
+
+  getBookByIsbn(isbn: string) {
+    return this.httpClient.get<Book>(environment.apiBackendEndpoint + 'books/isbn/' + isbn);
+  }
 }

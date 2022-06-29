@@ -1,0 +1,41 @@
+.lists-wrapper {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  top:0; bottom:0; right:0; left:0;
+  width:60%;
+  margin:auto;
+}
+
+.header-section {
+  align-self: start;
+  margin-top:10px;
+}
+
+.buttons-section {
+  width:100%;
+  display:flex;
+  flex-flow: row wrap;
+  align-items: end;
+  justify-content: end;
+}
+
+.buttons-section button {
+  margin:5px;
+}
+
+.lists-container {
+  display: flex;
+  flex-direction: row;
+  color:black;
+  width:100%;
+}
+
+.lists-container mat-list-option {
+  color:black;
+  background: #f2f1ed;
+}
+
+.lists-container mat-list-option[aria-selected="true"] {
+  background-color: rgba(0, 139, 139, 0.7);
+}
