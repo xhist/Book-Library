@@ -147,6 +147,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get book by isbn",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/isbn/9786624909923",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"isbn",
+								"9786624909923"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
