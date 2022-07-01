@@ -34,10 +34,7 @@ export class ListComponent implements OnChanges, AfterViewInit {
   notesList: ListNote[] = [];
 
   @Output()
-  onDelete: EventEmitter<ListNote> = new EventEmitter();
-
-  @Output()
-  notesListChange = new EventEmitter<ListNote[]>();
+  onDelete: EventEmitter<Note[]> = new EventEmitter();
 
   constructor(private noteService: NoteService) { }
 
@@ -58,10 +55,6 @@ export class ListComponent implements OnChanges, AfterViewInit {
     this.dataSource$.paginator = this.paginator;
     // @ts-ignore
     this.dataSource$.sort = this.sort;
-  }
-
-  deleteNote(note: ListNote) {
-    this.onDelete.emit(note);
   }
 
   isAllSelected() {
@@ -93,15 +86,30 @@ export class ListComponent implements OnChanges, AfterViewInit {
   }
 
   isEditable(note: ListNote) {
-    console.log(note);
     return note.name == this.edited.listname && note.isbn == this.edited.isbn;
   }
 
   editNote(note: ListNote) {
-    this.noteService.getNoteByIsbnAndList({listName: note.name, isbn: note.isbn, description:note.note})
-      .subscribe((value) => {
-        this.noteService.updateNote(value).then();
+    var currentNote: Note = {listName: note.name, isbn: note.isbn, description:note.note};
+    this.noteService.updateNote(currentNote).then();
+    this.edited = {listname: '', isbn: ''};
+  }
+
+  extractSelectedNotes(): Note[] {
+    var selectedNotes: Note[] = [];
+    if(this.selection.selected.length > 0) {
+      this.selection.selected.forEach((current, index) => {
+        var note = {description: current.note, isbn: current.isbn, listName: current.name};
+        selectedNotes.push(note);
       })
+    }
+
+    return selectedNotes;
+  }
+
+  deleteNotes(){
+    this.onDelete.emit(this.extractSelectedNotes());
+    this.selection.clear();
   }
 
 }

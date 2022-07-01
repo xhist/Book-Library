@@ -41,10 +41,17 @@ public class NoteService {
     }
 
     public void update(Note note) {
-        if (!noteRepository.existsById(note.getId()) && !noteRepository.existsByBookAndList(note.getBook(), note.getList())) {
+        if (note.getId() != null && !noteRepository.existsById(note.getId())) {
+            throw new NoSuchElementException(NOT_FOUND_NOTE);
+        }
+        if(!noteRepository.existsByBookAndList(note.getBook(), note.getList())) {
             throw new NoSuchElementException(NOT_FOUND_NOTE);
         }
 
+        if(note.getId() == null)
+        {
+            note.setId(findByBookAndList(note.getBook().getIsbn(), note.getList().getName()).getId());
+        }
         noteRepository.save(note);
     }
 

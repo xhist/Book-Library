@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, tap} from "rxjs";
+import {BehaviorSubject, flatMap, tap} from "rxjs";
 import {List} from "./list";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -23,5 +23,12 @@ export class ListService {
 
   getAllListsAsObservable() {
     return this.lists$.asObservable();
+  }
+
+  deleteList(name: string) {
+    return this.httpClient.delete(environment.apiBackendEndpoint + 'lists/' + name)
+      .pipe(
+        flatMap(() => this.getAllLists())
+      ).toPromise();
   }
 }

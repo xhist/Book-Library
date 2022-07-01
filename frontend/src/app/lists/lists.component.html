@@ -15,14 +15,14 @@
       <mat-list-option matRipple [matRippleColor]="rippleColorList" *ngFor="let list of lists$" [value]="list.name">
         <h2 mat-line>{{list.name}}</h2>
         <p mat-line>
-          <span>{{list.name | notesCount : listNotes$ }} notes</span>
+          <span>{{list.name | notesCount : listNotesChange$.value }} notes</span>
         </p>
       </mat-list-option>
     </mat-selection-list>
 
     <div class="list-content">
       <app-list *ngIf="this.currentNotes.length > 0; else emptyComponent"
-                [(notesList)]="currentNotes"></app-list>
+                [notesList]="currentNotes" (onDelete)="this.onNotesDelete($event)"></app-list>
       <ng-template #emptyComponent>
         <app-empty></app-empty>
       </ng-template>

@@ -69,4 +69,16 @@ public class NoteController {
     public void delete(@PathVariable Long id) {
         this.noteService.delete(id);
     }
+
+    @DeleteMapping(value = {"/book/{isbn}/list/{name}", "/list/{name}/book/{isbn}"})
+    public void deleteByBookAndList(@PathVariable String isbn, @PathVariable String name) {
+        this.noteService.delete(this.noteService.findByBookAndList(isbn, name).getId());
+    }
+
+    @DeleteMapping("/multiple")
+    public void deleteMultiple(@Valid @RequestBody List<NoteDto> notes) {
+        for(NoteDto note: notes) {
+            this.noteService.delete(this.noteService.findByBookAndList(note.getIsbn(), note.getListName()).getId());
+        }
+    }
 }
