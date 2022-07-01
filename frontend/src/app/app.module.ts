@@ -16,6 +16,7 @@ import { SelectListComponent } from './listdialog/select-list/select-list.compon
 import { NotesCountPipe } from './lists/notes-count.pipe';
 import { EmptyComponent } from './lists/empty/empty.component';
 import { MyautofocusDirective } from './directives/myautofocus.directive';
+import { ListsdialogComponent } from './lists/listsdialog/listsdialog.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MyautofocusDirective } from './directives/myautofocus.directive';
     SelectListComponent,
     NotesCountPipe,
     EmptyComponent,
-    MyautofocusDirective
+    MyautofocusDirective,
+    ListsdialogComponent
   ],
   imports: [
     BrowserModule,

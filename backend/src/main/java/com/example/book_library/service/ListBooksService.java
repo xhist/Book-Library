@@ -27,6 +27,11 @@ public class ListBooksService {
     }
 
     public void add(ListBooks list) {
+        if(list.getName() == null || list.getName() == "")
+        {
+            throw new IllegalArgumentException("The name must not be empty or null!");
+        }
+
         if(listRepository.existsById(list.getName()))
         {
             throw new IllegalArgumentException(

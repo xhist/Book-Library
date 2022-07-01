@@ -9,8 +9,8 @@ public class ListBooks {
     @Id
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "notes_id")
+    @OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
     private Set<Note> notes;
 
     public ListBooks() {}

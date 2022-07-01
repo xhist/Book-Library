@@ -5,6 +5,8 @@ import {NoteService} from "../services/note.service";
 import {BookService} from "../services/book.service";
 import {BehaviorSubject, combineLatest, forkJoin} from "rxjs";
 import {Book} from "../services/book";
+import {MatDialog} from "@angular/material/dialog";
+import {ListsdialogComponent} from "./listsdialog/listsdialog.component";
 
 @Component({
   selector: 'app-lists',
@@ -19,7 +21,8 @@ export class ListsComponent implements OnInit {
   selectedList: string = "";
   currentNotes: ListNote[] = [];
 
-  constructor(private listService: ListService, private noteService: NoteService, private bookService: BookService) { }
+  constructor(private listService: ListService, private noteService: NoteService, private bookService: BookService,
+              public dialog: MatDialog) { }
 
   setListNotes(lists: List[], notes: Note[], books: Book[]) {
     var notesList: ListNote[] = [];
@@ -70,5 +73,12 @@ export class ListsComponent implements OnInit {
     this.noteService.deleteNotes($event).then();
   }
 
+  deleteSelectedList() {
+    if(this.selectedList != null && this.selectedList != "")
+      this.listService.deleteList(this.selectedList).then();
+  }
 
+  addNewList() {
+    this.dialog.open(ListsdialogComponent);
+  }
 }

@@ -3,10 +3,10 @@
     <h1 style="font-weight: bold">Current lists</h1>
   </div>
   <div class="buttons-section">
-    <button mat-mini-fab color="warn" aria-label="Delete list">
+    <button mat-mini-fab color="warn" aria-label="Delete list" (click)="deleteSelectedList()">
       <mat-icon>delete</mat-icon>
     </button>
-    <button mat-mini-fab color="accent" aria-label="Add list">
+    <button mat-mini-fab color="accent" aria-label="Add list" (click)="addNewList()">
       <mat-icon>add</mat-icon>
     </button>
   </div>

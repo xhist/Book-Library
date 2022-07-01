@@ -26,7 +26,14 @@ export class ListService {
   }
 
   deleteList(name: string) {
-    return this.httpClient.delete(environment.apiBackendEndpoint + 'lists/' + name)
+    return this.httpClient.delete(environment.apiBackendEndpoint + 'lists/name/' + name)
+      .pipe(
+        flatMap(() => this.getAllLists())
+      ).toPromise();
+  }
+
+  addList(list: List) {
+    return this.httpClient.post(environment.apiBackendEndpoint + 'lists', list)
       .pipe(
         flatMap(() => this.getAllLists())
       ).toPromise();

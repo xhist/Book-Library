@@ -29,7 +29,7 @@ public class Note {
     @JoinColumn(name = "books_isbn")
     private Book book;
 
-    @OneToOne(cascade = {
+    @ManyToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.PERSIST,
             CascadeType.MERGE,

@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Choose name: </h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <input matInput [(ngModel)]="currentName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="start">
+  <button mat-button color="accent" cdkFocusInitial (click)="createList()">Add</button>
+</div>
